@@ -22,3 +22,68 @@ Tools:
 Node
 VSCode
 NPM - Node Package Manager to install npm packages
+
+////////////////////////////////////
+	Building blocks of Angular
+///////////////////////////////////
+Module 		=>	Module is the parent of the application
+Component	=>	HTML, CSS with TS logic
+Pipe		=>	Runtime data changes
+Service		=>	Connect with API/ external agent (Dependency injection)
+Routing		=>	Manage multiple page
+
+File structure
+===============
+tslint.json -> linting, make structure of code
+tsconfig.spec.json -> help to locate test files
+tsconfig.json -> ts compiler options - build output, targetting js version
+tsconfig.app.json => Help to locate main files
+ReadME.md => description of application
+Package.json => dependency, commands and version info
+package.lock.json => child dependencies
+angular.json => first file to run contains the path reference for all the files (src, styles, template  &configs) it runs src/main.ts
+.gitignore => ignore files for git
+.editorconfig => standard developer follows in editor
+src
+	style.css => main style file
+	polyfills.ts => support old browser
+	index.html => mail html template page
+	favicon => browser icon
+	assets => images, video, documents other static files
+	environment => set PRO/ NON-PRO
+	main.ts => load main module it loads app.module.ts
+	app
+		app.module.ts => load main component
+			import, decorators, export
+			import
+				NgModule from @angular/core for Modules
+				Component from @angular/core for Components
+				Pipe, PipeTransform for directives & pipes
+				Injectible for Services
+				NgModule for Routing
+				BrowserModule from @angular/platform-browser for display content in the browser
+			
+			Decorators
+				imports -> all modules
+				declarations -> all components & pipes
+				providers -> all services
+				provider -> only main component usually AppComponent
+		app.component.ts
+			import, decorator, export
+			import 
+				Component
+			decorator
+				selector
+				template/templateUrl - one html
+				styles/styleUrl - inline css multiple css 
+
+Create Component
+	Header
+	Footer
+	Product component - ng g c product
+			
+
+
+
+
+
