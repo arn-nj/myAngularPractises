@@ -188,9 +188,82 @@ Subscribe to Aakash Channel Developer funnel
 	Binding
 	Directives
 	Pipes & Custom Pipes
-	 
 
+## Day 4
 
+### Recap and QA
+	1. var array = [0,1,2,3]
+	array.map((data) => { return data*2}) vs array.filter((data) => { return data*2})
+	ans: [0,2,4,6] and [1,2,3] 
+	map returns same length of array
+	filter only returns value for which the given condition is true
+
+	2. ///////////////////////////
+	var myvar = []
+	for(var i=0;i<3;i++){
+    		myvar[i]=function(){
+        	console.log("I m in function ",i)
+    	}
+	}
+
+	for(j=0;j<3;j++){
+    	myvar[j]()
+	}
+
+	
+
+### Use of IndexOf and Filter in SearchPipe
+	DEMO 1: ProductSearch.pipe.ts
+	1. Import Pipe, pipeTransform
+	2. Decoratar @Pipe(name: somename)
+	3. Interface class more like model
+	4. create product.model.ts
+	5. export interface IProduct and define the variables for model
+	6. import IProduct into component.ts & ProductSearch pipe
+	7. transform(value: Iproduct[], userinput:string):IProduct{
+		userInput = userInput ? userInput.toLowerCase(): null
+		return userInput ? value.filter((data) => data.name.indexOf(userInput)!= -1 : value;
+	}
+	8. reference the pipe in the app.module
+	9. Use it in the html 
+	10. Search count add in the html 
+
+### Rating
+	create a child component rating component and use them in product component
+	DEMO : Star Rating
+	
+	1. Star.component in Shared folder
+	2. Import Component 
+	3. @Component{ selector: ; templateUrl: StyleUrl}
+	4. export class starComponent
+	5. Create HTML and css
+	6. glyphicon/fonticon
+	<div class="crop" [style.width.px]="starwidth">
+		<div width="">
+		<span class="glyphicon glyphicon-star"></span> five times
+		</div>
+	</div>
+	7. width/5 total width we used 5 stars. so we can divide the width/rating so that it can fit that much stars
+	8. .crop css overflow:hidden
+	9. use <app-star> in parent component
+	10. Pass data to <app-star>
+		@Input Parent to child. property binding
+		@Output child to Parent. Event binding
+	11. put @Input() rating:number in the child component
+	12. LifeCycle Hook
+		Onchanges - Implements OnChanges
+		use ngOnChanges() { this.starWidth = width*rating/5 ;}
+	13. Task: with five star fill only 4 star
+		Have two div with position abolute and different color and one with overflow hidden
+	14. Child to Parent - when click on the start use callback
+		@Output() ratingClicked: EventEmitter<string> = new EventEmitter<string>
+	15. add click method to html (click) = onStar
+	16. implement onStar() { this.ratingClicked.Emit("The Rating clicked is ${this.rating}");}
+	17. in the parent add (ratingClicked)="dataReceive($event)" in app-star tag
+	18. implement dataReceive($event)  in the parent component.ts
+	19. Loader.gif
+  	20. ng-template #nodata where put the loader image 
+	21. use this loading when there is no restaurant
 
 
 

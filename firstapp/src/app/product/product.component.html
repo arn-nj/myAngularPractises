@@ -1,9 +1,13 @@
-<div class="panel panel-dark">
-  <div class="panel-header">
-    {{title}}
-  </div>
-  <div class="panel-body">
+<div class="container">
+  <div class="panel panel-dark">
+    <div [ngClass]="{lucky: mydiscount>25}">
+      Random Discount: {{ mydiscount }} <br />
+      Luck: {{message}}
+    </div>
 
+    <div class="panel-header">
+      <h1>{{title}}</h1>
+    </div>
     <div class="row">
       <div class="col-md-1">
         Filter By:
@@ -11,38 +15,55 @@
       <div class="col-md-2">
         <input type="text" [(ngModel)]="searchText" />
       </div>
-      <div class="col-md-4">
-        <h2>User Text: {{searchText}}</h2>
+
+      <div class="col-md-4" *ngIf="restaurantList">
+        <h6> {{ (restaurantList | searchRestaurant:searchText).length}} Restaurants Found.</h6>
+        <p>{{rateMessage}}</p>
       </div>
     </div>
-    <div class="row">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">
-              <button class="btn btn-md btn-success " (click)="toggleImage()">
-                {{condition? "Hide Image": "Show Image"}}
-              </button>
-            </th>
-            <th scope="col">Restaurant</th>
-            <th scope="col">City</th>
-            <th scope="col">Rating</th>
-            <th scope="col">min price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let restaurant of restaurantList">
-            <th scope="row">
-              <img [src]="restaurant.thumb" class="myImage" *ngIf="condition" />
-            </th>
-            <td>{{restaurant.name | uppercase}}</td>
-            <td>{{restaurant.city}}</td>
-            <td [ngStyle]="{color: restaurant.aggregate_rating<4? 'red':'green'}">{{restaurant.aggregate_rating}}</td>
-            <td>{{restaurant.min_price | currency:'INR'}}</td>
-          </tr>
+    <div class="panel-body">
+      <div class="row">
+        <table class="table" *ngIf="restaurantList;else noData">
+          <thead>
+            <tr>
+              <th scope="col">
+                <button class="btn btn-md btn-success " (click)="toggleImage()">
+                  {{condition? "Hide Image": "Show Image"}}
+                </button>
+              </th>
+              <th scope="col">Restaurant</th>
+              <th scope="col">City</th>
+              <th scope="col">Rating</th>
+              <th scope="col">min price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let restaurant of restaurantList | searchRestaurant:searchText">
+              <th scope="row">
+                <img [src]="restaurant.thumb" class="myImage" *ngIf="condition" />
+              </th>
+              <td>{{restaurant.name | uppercase}}</td>
+              <td>{{restaurant.city}}</td>
+              <td [ngStyle]="{color: restaurant.aggregate_rating<4? 'red':'green'}">
+                <app-rating [rating]="restaurant.aggregate_rating" (ratingClick)="rateClick($event)"></app-rating>
+              </td>
+              <td>{{restaurant.min_price | myDiscount:mydiscount |  currency:'INR'}}</td>
+            </tr>
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #noData>
+        <div class="spin">
+          <!-- <div class="spinner-grow text-primary"></div> -->
+          <div class="spinner-grow text-success"></div>
+        <!--  <div class="spinner-grow text-info"></div>
+          <div class="spinner-grow text-warning"></div>
+          <div class="spinner-grow text-danger"></div> -->
+        </div>
+      </ng-template>
+
     </div>
   </div>
 </div>

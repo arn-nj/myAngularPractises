@@ -1,0 +1,11 @@
+.crop {
+    overflow: hidden !important;
+    color: goldenrod;
+    position: absolute;
+    font-size: 10px;
+}
+.pos{
+    position: absolute;
+    color: grey;
+    font-size: 10px;
+}
