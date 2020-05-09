@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+    <div class="col-sm-12 col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h2>Employee List</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-dark table-responsive">
+                <thead>
+                    <th scope="row">
+                        #ID
+                    </th>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Dept Name
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+
+                    </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employeeList;index as i">
+                        <td>
+                            {{ employee.id}}
+                        </td>
+                        <td>
+                            <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.firstName}}</span>
+                            <input type="text" class="form-control" [(ngModel)]="employee.firstName" *ngIf="editEmployee && editEmpIndex==i"/> 
+                        </td>
+                        <td>
+                            <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.lastName}}</span>
+                            <input type="text" class="form-control" [(ngModel)]="employee.lastName" *ngIf="editEmployee && editEmpIndex==i"/> 
+                        </td>
+                        <td>
+                            <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.department}}</span>
+                            <input type="text" class="form-control" [(ngModel)]="employee.department" *ngIf="editEmployee && editEmpIndex==i"/> 
+                        </td>
+                        <td>
+                            <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.city}}</span>
+                            <input type="text" class="form-control" [(ngModel)]="employee.city" *ngIf="editEmployee && editEmpIndex==i"/> 
+                        </td>
+                        <td>
+                            <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.emailId}}</span>
+                            <input type="text" class="form-control" [(ngModel)]="employee.emailId" *ngIf="editEmployee && editEmpIndex==i"/> 
+                        </td>
+                        <td>
+                            <button class="btn btn-success" *ngIf="editEmployee && editEmpIndex==i" (click)="updateEmp()">Update Details</button>
+                            <button class="btn btn-success" *ngIf="!editEmployee" (click)="editEmp(i)">Edit Employee Details</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+                
+            </table>
+
+        </div>
+    </div>
+    </div>
+
+</div>
