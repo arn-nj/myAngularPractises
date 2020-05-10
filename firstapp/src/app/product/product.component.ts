@@ -44,7 +44,7 @@ export class ProductComponent implements OnInit {
   }
 
   loadRestaurant():void{
-   this.productService.getHotels().subscribe(
+   this.productService.getRestaurants().subscribe(
       (data) => this.restaurantList = data
     );
   }

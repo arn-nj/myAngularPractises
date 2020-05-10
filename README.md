@@ -282,11 +282,11 @@ Subscribe to Aakash Channel Developer funnel
 	1. Service Import - Injectable, Dependency injection
 	2. @Injectable({providedIn:'root'})
 	3. export class Product Service
-	4. Create a method getHotels return the restaurant array
+	4. Create a method getrestaurants return the restaurant array
 	5. Reference the service in App Module in Provide
 	6. Import service in Component
 	7. inject the Product service in Constructor
-	8. Call the product service getHotels in the ngOnInit
+	8. Call the product service getrestaurants in the ngOnInit
 	9. Also put console log to understand the order of the lifecycle methods
 	DEMO - Mock API server
 	1. Install a package json-server global package
@@ -299,12 +299,12 @@ Subscribe to Aakash Channel Developer funnel
 	3. In service, import HttpClient from @angular/common /http and Observable fromrxjs
 	Read about: RxJs
 	4. create a variable holding the aPI link
-	5. create getHotels(): Observable<IProduct[]>{
+	5. create getrestaurants(): Observable<IProduct[]>{
 			return this.http.get<Iproduct[]>(this.request.Url);
 			}
 	6. Use it component.
-	7. Instead of calling direct getHotels() call, we have to use subscribe() along with getHotels
-			this.ProductService.getHotels().subscribe((data)=> this.restaurantList = data)
+	7. Instead of calling direct getrestaurants() call, we have to use subscribe() along with getrestaurants
+			this.ProductService.getrestaurants().subscribe((data)=> this.restaurantList = data)
 	8. Validate the same in browser
 
 ## Routing

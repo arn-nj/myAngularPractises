@@ -42,7 +42,7 @@
               <th scope="row">
                 <img [src]="restaurant.thumb" class="myImage" *ngIf="condition" />
               </th>
-              <td><a [routerLink]="['/hotels',restaurant.id]">
+              <td><a [routerLink]="['/restaurants',restaurant.id]">
                 {{restaurant.name | uppercase}}
               </a>
               </td>

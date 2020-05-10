@@ -8,8 +8,8 @@ import { ProductDetailsComponent } from './product/product-details.component';
 
 
 const routes: Routes = [
-  {path: 'hotels', component:ProductComponent},
-  {path:'hotels/:id', component:ProductDetailsComponent},
+  {path: 'restaurants', component:ProductComponent},
+  {path:'restaurants/:id', component:ProductDetailsComponent},
   {path:'orders',component:OrderComponent},
   {path:'', redirectTo:'home', pathMatch:'full'},
   {path:'home', component: HomeComponent},

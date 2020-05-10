@@ -6,18 +6,18 @@ import {Observable} from 'rxjs';
 @Injectable({providedIn: 'root'})
 
 export class ProductService {
-    restUrl:string = "http://localhost:8080/hotels";
+    restUrl:string = "http://localhost:8080/restaurants";
 
 
     constructor(private client: HttpClient){
 
     }
 
-    getHotels(): Observable<IProduct[]>{
+    getRestaurants(): Observable<IProduct[]>{
         return this.client.get<IProduct[]>(this.restUrl);
     }
 
-    getHotelsById(id:number): Observable<IProduct>{
+    getRestaurantsById(id:number): Observable<IProduct>{
         return this.client.get<IProduct>(`${this.restUrl}/${id}`);
     }
     

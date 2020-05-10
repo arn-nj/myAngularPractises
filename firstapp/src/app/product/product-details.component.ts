@@ -21,7 +21,7 @@ export class ProductDetailsComponent implements OnInit {
 
     ngOnInit() { 
         this.id = this.route.snapshot.params["id"];
-        this.productService.getHotelsById(this.id).subscribe(
+        this.productService.getRestaurantsById(this.id).subscribe(
             (data)=>this.restaurant = data
         )
     }
