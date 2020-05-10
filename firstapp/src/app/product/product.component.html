@@ -42,7 +42,10 @@
               <th scope="row">
                 <img [src]="restaurant.thumb" class="myImage" *ngIf="condition" />
               </th>
-              <td>{{restaurant.name | uppercase}}</td>
+              <td><a [routerLink]="['/hotels',restaurant.id]">
+                {{restaurant.name | uppercase}}
+              </a>
+              </td>
               <td>{{restaurant.city}}</td>
               <td [ngStyle]="{color: restaurant.aggregate_rating<4? 'red':'green'}">
                 <app-rating [rating]="restaurant.aggregate_rating" (ratingClick)="rateClick($event)"></app-rating>

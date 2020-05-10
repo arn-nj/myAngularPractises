@@ -65,7 +65,7 @@ src/main.ts | load main module it loads app.module.ts
 					Injectible for Services
 					NgModule for Routing
 					BrowserModule from @angular/platform-browser for display content in the browser
-
+	
 				Decorators
 					imports | all modules
 					declarations | all components & pipes
@@ -98,7 +98,7 @@ Subscribe to Aakash Channel Developer funnel
 	Data Binding {{}} or interpolation
 	Property binding or attribute binding []
 	Event binding()
-
+	
 	Demo 1: In Product Component
 		a. Define Variable in the class "title"
 		b. use {{}}
@@ -113,7 +113,7 @@ Subscribe to Aakash Channel Developer funnel
 		h. define condition variable in .ts class
 		i. event binding - (click) = "toggleImage()" note: dont miss the braces
 		j. write a function toggleImage
-					
+
 
 #### Two way [()]
 	Data flows in both directions
@@ -152,12 +152,12 @@ Subscribe to Aakash Channel Developer funnel
 	6. write logic into the method. return a value
 	7. Reference in App.Module
 	8. Use the pipe in html
-
+	
 	DEMO 7: make two parameters pipe
 	1. Left Hands side 1st parameter
 	2. Right Hand side 2nd parameter
 	3. case - lower, upper, camel case, Pascal case
-
+	
 	Read: MAP, FILTER, INDEXOF
 	
 	DEMO 8: mydiscount.pipe.ts
@@ -170,7 +170,7 @@ Subscribe to Aakash Channel Developer funnel
 	}
 	5. If you use string for mydiscount.pipe, it becomes NaN or gives error
 	6. Use it in html before formatting for string currency
-
+	
 	DEMO 9: Random discount
 	I want to generate discount every page load
 	1. mydiscount variable in the component Math.Floor(math.random(max-min)+min
@@ -183,7 +183,7 @@ Subscribe to Aakash Channel Developer funnel
 	6. define Class .lucky in the decorator
 	7. Use [NgClass] = {'bg-color': expression} use expression to specify the class
 	8. Other way to use is [ngClass] = {'color':'getColor()'}
-
+	
 	Recap:
 	Binding
 	Directives
@@ -197,20 +197,22 @@ Subscribe to Aakash Channel Developer funnel
 	ans: [0,2,4,6] and [1,2,3] 
 	map returns same length of array
 	filter only returns value for which the given condition is true
-
+	
 	2. ///////////////////////////
 	var myvar = []
 	for(var i=0;i<3;i++){
-    		myvar[i]=function(){
-        	console.log("I m in function ",i)
-    	}
+			myvar[i]=function(){
+	    	console.log("I m in function ",i)
+		}
 	}
-
-	for(j=0;j<3;j++){
-    	myvar[j]()
-	}
-
 	
+	for(j=0;j<3;j++){
+		myvar[j]()
+	}
+	////////////////////////////////
+
+
+​	
 
 ### Use of IndexOf and Filter in SearchPipe
 	DEMO 1: ProductSearch.pipe.ts
@@ -262,10 +264,91 @@ Subscribe to Aakash Channel Developer funnel
 	17. in the parent add (ratingClicked)="dataReceive($event)" in app-star tag
 	18. implement dataReceive($event)  in the parent component.ts
 	19. Loader.gif
-  	20. ng-template #nodata where put the loader image 
+	20. ng-template #nodata where put the loader image 
 	21. use this loading when there is no restaurant
 
+# Day 5
 
 
+## Life cycle hook
+	constructor is the first thing called inside the class - Declarations
+	ngOnInit is the next lifecycle hook -
+	ngOnChanges when there is a input changes
+	ngOnDestroy when the component is unloaded
+
+## Service
+	We inject our Product Service into the component using constructor dependency injection
+	DEMO - PRODUCT SERVICE
+	1. Service Import - Injectable, Dependency injection
+	2. @Injectable({providedIn:'root'})
+	3. export class Product Service
+	4. Create a method getHotels return the restaurant array
+	5. Reference the service in App Module in Provide
+	6. Import service in Component
+	7. inject the Product service in Constructor
+	8. Call the product service getHotels in the ngOnInit
+	9. Also put console log to understand the order of the lifecycle methods
+	DEMO - Mock API server
+	1. Install a package json-server global package
+	2. json-server --watch db.json --port 8080
+	3. Wrap complete json into object and save it as db.json
+	4. try accessing in browser
+	DEMO - API call
+	1. Now that we are done with MockApI, we should use the API call in angular
+	2. Import HttpClientModule from angular/common/http in AppModule
+	3. In service, import HttpClient from @angular/common /http and Observable fromrxjs
+	Read about: RxJs
+	4. create a variable holding the aPI link
+	5. create getHotels(): Observable<IProduct[]>{
+			return this.http.get<Iproduct[]>(this.request.Url);
+			}
+	6. Use it component.
+	7. Instead of calling direct getHotels() call, we have to use subscribe() along with getHotels
+			this.ProductService.getHotels().subscribe((data)=> this.restaurantList = data)
+	8. Validate the same in browser
+
+## Routing
+	DEMO - Create Routing
+	1. Generate Home component using cli
+	2. Generate Order component using cli
+	3. In Home Component put some html with Page Title interpolation
+	4. In Order Component Html, Place some HTML for now
+	5. Create app-routing.module.ts
+	6. Import NgModule from '@angular/core'
+	7. import {Routes, RouterModule} from '@angular/router'
+	4. create path variable
+		path: 'restaurants', component: ProductComponent
+		path: 'order', component: OrdersComponent
+		path: 'home', component: HomeComponent
+		path: '', redirectTo: Home, pathMatch: 'full'
+		Path: '**' component: NotfoundComponent
+	5. @NgModule decorator @NgModule(
+			imports: [],
+			providers:[],
+			exports:[]
+	 )
+	6. create a export class RoutingModule
+	7. In decorator imports put RouterModule.forRoot(routes)
+	8. In decorator exports put RouterModule
+	9. Now reference app-routing.Module in app.module
+	10. 
+	11. 
+	
+	DEMO: Use the Routes in Nav bar
+	1. In app.component.html use <router-outlet></router-outlet>
+	2. use [routerLink] in Header component html's nav bar
+	3. Create ProductDetails Component and link it to the  route
+			1. Param vs Query Param
+			2. Create a link for restaurant Name with routerLink = ['/restaurant/', restaurant.id]
+			3. create a route in app-routing.module.ts
+			4. to read query param/param we need to import {ActivatedRoute,Router}
+			5. Inject ActivatedRoute in constructor
+			6. in ngOnInit() assign id = this.route.snapshot.params('id')
+			7. Now in html use interpolation to show the ID
+			8. How to pass Query Param - using [queryParam], pass the values as object: key:value
+			9. How to receive that in Details PAge - 
+				this.route.queryParams.subscribe((data)=>
+					this.variabename =data[<parameter>]);
+	
 
 

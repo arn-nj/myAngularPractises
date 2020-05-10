@@ -1,0 +1,22 @@
+<div class="jumbotron">
+    <h1>Restaurant {{restaurant.name}}</h1>
+    <div class="card">
+        <div class="card-img">
+            <img [src]="restaurant.thumb" />
+        </div>
+        
+        <div class="card-body">
+            <div>{{restaurant.city}}</div>
+            <div>
+                    <app-rating [rating]="restaurant.aggregate_rating"
+                    ></app-rating>
+            </div>
+            <div class=" price">
+                {{restaurant.min_price | currency: 'INR'}}
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-success" [routerLink]="['/hotels']" routerLinkActive="router-link-active" >Back to hotels</button>
+        </div>
+    </div> 
+</div>
