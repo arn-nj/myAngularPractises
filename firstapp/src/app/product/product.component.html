@@ -1,27 +1,30 @@
 <div class="container">
-  <div class="panel panel-dark">
-    <div [ngClass]="{lucky: mydiscount>25}">
-      Random Discount: {{ mydiscount }} <br />
-      Luck: {{message}}
-    </div>
+  <div class="card card-dark">
+    
 
-    <div class="panel-header">
+    <div class="card-title">
       <h1>{{title}}</h1>
     </div>
-    <div class="row">
+    <div class="card-deck-1">
       <div class="col-md-1">
         Filter By:
       </div>
       <div class="col-md-2">
         <input type="text" [(ngModel)]="searchText" />
       </div>
-
       <div class="col-md-4" *ngIf="restaurantList">
         <h6> {{ (restaurantList | searchRestaurant:searchText).length}} Restaurants Found.</h6>
         <p>{{rateMessage}}</p>
       </div>
     </div>
-    <div class="panel-body">
+    <div class="card-deck-1 right">
+      <div class="col-md-4" [ngClass]="{lucky: mydiscount>25}">
+        <p>Random Discount: {{ mydiscount }} <br />
+        Luck: {{message}} </p>
+      </div>
+    </div>
+
+    <div class="card-body">
       <div class="row">
         <table class="table" *ngIf="restaurantList;else noData">
           <thead>
@@ -56,6 +59,8 @@
           </tbody>
         </table>
       </div>
+
+     
 
       <ng-template #noData>
         <div class="spin">

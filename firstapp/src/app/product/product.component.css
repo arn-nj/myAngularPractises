@@ -13,3 +13,8 @@ h1{
     top: 50%;
     left: 50%;
 }
+.right{
+    float: right;
+    position: relative;
+    text-align: right;
+}
