@@ -18,10 +18,10 @@
                         Last Name
                     </th>
                     <th>
-                        Dept Name
+                        Date of Birth
                     </th>
                     <th>
-                        City
+                        Salary
                     </th>
                     <th>
                         Email
@@ -31,7 +31,7 @@
                     </th>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let employee of employeeList;index as i">
+                    <tr ColorOnHover *ngFor="let employee of employeeList;index as i">
                         <td>
                             {{ employee.id}}
                         </td>
@@ -44,12 +44,12 @@
                             <input type="text" class="form-control" [(ngModel)]="employee.lastName" *ngIf="editEmployee && editEmpIndex==i"/> 
                         </td>
                         <td>
-                            <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.department}}</span>
-                            <input type="text" class="form-control" [(ngModel)]="employee.department" *ngIf="editEmployee && editEmpIndex==i"/> 
+                            <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.Dob | date | uppercase}}</span>
+                            <input type="text" class="form-control" [(ngModel)]="employee.Dob" *ngIf="editEmployee && editEmpIndex==i"/> 
                         </td>
                         <td>
-                            <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.city}}</span>
-                            <input type="text" class="form-control" [(ngModel)]="employee.city" *ngIf="editEmployee && editEmpIndex==i"/> 
+                            <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.salary| currency:'INR'}}</span>
+                            <input type="text" class="form-control" [(ngModel)]="employee.salary" *ngIf="editEmployee && editEmpIndex==i"/> 
                         </td>
                         <td>
                             <span *ngIf="!editEmployee || editEmpIndex !=i">{{employee.emailId}}</span>
